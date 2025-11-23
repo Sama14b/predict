@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 // Servir la carpeta del modelo TFJS (model/model.json + pesos)
-const modelDir = path.resolve(__dirname, "model");
+const modelDir = path.resolve(__dirname, "model_tfjs_graph");
 app.use("/model", express.static(modelDir));
 
 // Rutas del servicio PREDICT
