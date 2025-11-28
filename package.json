@@ -10,13 +10,13 @@
   "author": "Sama14b",
   "license": "ISC",
   "dependencies": {
+    "@tensorflow/tfjs-backend-wasm": "^4.22.0",
     "@tensorflow/tfjs-node": "^4.22.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "mongoose": "^8.20.1"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sama14b/predict.git"

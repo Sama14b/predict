@@ -6,6 +6,18 @@ const path = require("path");
 const predictRoutes = require("./routes/predictRoutes");
 const { initModel } = require("./services/tfModelService");
 
+const mongoose = require("mongoose");
+mongoose
+  .connect(process.env.MONGO_URI || "mongodb://localhost:27017/sd_predictions")
+  .then(() => {
+    console.log("Conexión a la base de datos establecida.");
+  })
+  .catch((err) => {
+    console.error("Error de conexión a la base de datos:", err.message);
+    // Si la BD falla, el microservicio se considera NO operacional.
+    process.exit(1); 
+  });
+
 const PORT = process.env.PORT || 3002;
 
 const app = express();
