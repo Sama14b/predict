@@ -1,6 +1,7 @@
 // controllers/predictController.js
 const { getModelInfo, predict } = require("../services/tfModelService");
-const PredictionModel = require("../model/predictionModel");
+const predictionModel = require("../model/predictionModel");
+const predictionService = require('../services/predictionService');
 
 function health(req, res) {
   res.json({
@@ -90,8 +91,36 @@ async function doPredict(req, res) {
   }
 }
 
+// Tarea A: Controlador para el listado (GET /api/predict)
+async function getPredictions(req, res) {
+    try {
+        const listado = await predictionService.obtenerTodasLasPredicciones();
+        res.status(200).json({ total: listado.length, predictions: listado }); 
+    } catch (err) {
+        res.status(500).json({ error: `Error al obtener el listado: ${err.message}` });
+    }
+}
+
+// Tarea B: Controlador para eliminar (DELETE /api/predict/:id)
+async function deletePrediction(req, res) {
+    const id = req.params.id;
+    try {
+        const prediccionEliminada = await predictionService.eliminarPrediccion(id);
+
+        if (!prediccionEliminada) {
+            return res.status(404).json({ mensaje: 'No existe predicción con ese ID' });
+        }
+        
+        res.status(200).json({ mensaje: 'Predicción eliminada', id: prediccionEliminada._id });
+    } catch (err) {
+        res.status(500).json({ error: `Error al eliminar: ${err.message}` });
+    }
+}
+
 module.exports = {
   health,
   ready,
-  doPredict
+  doPredict, 
+  getPredictions,
+  deletePrediction
 };
