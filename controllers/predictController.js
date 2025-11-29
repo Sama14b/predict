@@ -1,6 +1,6 @@
 // controllers/predictController.js
 const { getModelInfo, predict } = require("../services/tfModelService");
-const PredictionModel = require("../models/prediction.model");
+const PredictionModel = require("../model/predictionModel");
 
 function health(req, res) {
   res.json({
