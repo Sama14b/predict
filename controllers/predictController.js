@@ -69,7 +69,7 @@ async function doPredict(req, res) {
 
     const modelVersion = info.modelVersion;
     
-    const newPrediction = new PredictionModel({
+    const newPrediction = new predictionModel({
         features: features, 
         prediction: prediction, 
         ts: timestamp,
